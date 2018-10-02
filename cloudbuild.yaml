@@ -10,9 +10,9 @@ steps:
     args:
       - '-c'
       - |
-        gcloud container clusters get-credentials "${CLOUDSDK_CONTAINER_CLUSTER}" \
-          --project "${CLOUDSDK_PROJECT}" \
-          --zone "${CLOUDSDK_COMPUTE_ZONE}"
+        gcloud container clusters get-credentials "$${CLOUDSDK_CONTAINER_CLUSTER}" \
+          --project "$${CLOUDSDK_PROJECT}" \
+          --zone "$${CLOUDSDK_COMPUTE_ZONE}"
     volumes:
       - name: 'kube'
         path: /kube
