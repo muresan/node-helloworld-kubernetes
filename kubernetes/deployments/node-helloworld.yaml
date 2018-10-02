@@ -1,0 +1,23 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: node-helloworld
+  name: node-helloworld
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: node-helloworld
+  template:
+    metadata:
+      labels:
+        app: node-helloworld
+    spec:
+      containers:
+      - image: gcr.io/catalin-learn-gcp-186712/github-muresan-node-helloworld:1.0.0
+        name: node-helloworld
+        ports:
+        - containerPort: 3000
+          name: http
+          protocol: TCP
