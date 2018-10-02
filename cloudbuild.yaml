@@ -4,19 +4,15 @@ steps:
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=${_CLOUDSDK_COMPUTE_ZONE}'
       - 'CLOUDSDK_CONTAINER_CLUSTER=${_CLOUDSDK_CONTAINER_CLUSTER}'
-      - 'KUBECONFIG=/kube/config'
-      - 'CLUSTER=${_CLOUDSDK_PROJECT}'
+      - 'CLOUDSDK_PROJECT=${_CLOUDSDK_PROJECT}'
+      - 'KUBECONFIG=/kube/config'      
     entrypoint: 'sh'
     args:
       - '-c'
       - |
-        CLUSTER=$$(gcloud config get-value container/cluster)
-        PROJECT=$$(gcloud config get-value core/project)
-        ZONE=$$(gcloud config get-value compute/zone)
-      
         gcloud container clusters get-credentials "${CLOUDSDK_CONTAINER_CLUSTER}" \
           --project "${CLOUDSDK_PROJECT}" \
-          --zone "${CLOUDSDK_ZONE}"
+          --zone "${CLOUDSDK_COMPUTE_ZONE}"
     volumes:
       - name: 'kube'
         path: /kube
